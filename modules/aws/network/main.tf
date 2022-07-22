@@ -56,14 +56,16 @@ resource "aws_subnet" "private" {
   }
 }
 
-resource "aws_eip" "my_eip" {
-  count       			= length(var.subnets)
+# EIP and Nat GW for internet access from private subnets
+resource "aws_eip" "main" {
+  count       			= length(var.subnets.private)
 	vpc 							= true
+  depends_on        = [ aws_internet_gateway.main ]
 }
 
-resource "aws_nat_gateway" "my_nat_gw" {
-  count       			= length(var.subnets)
-	allocation_id 		= aws_eip.my_eip[count.index].id
+resource "aws_nat_gateway" "main" {
+  count       			= length(var.subnets.private)
+	allocation_id 		= aws_eip.main[count.index].id
 	subnet_id 				= aws_subnet.public[count.index].id
 }
 
