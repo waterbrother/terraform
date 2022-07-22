@@ -1,6 +1,4 @@
-variable "cluster" {
-  type = map(string)
-}
+variable "cluster_name" {}
 
 variable "private_subnet_ids" {
   type = list(string)

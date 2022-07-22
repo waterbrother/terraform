@@ -1,5 +1,5 @@
 resource "aws_iam_role" "worker_nodes" {
-  name    = "${var.cluster.name}-workers"
+  name    = "${var.cluster_name}-workers"
   assume_role_policy  = <<POLICY
 {
   "Version": "2012-10-17",
@@ -32,8 +32,8 @@ resource "aws_iam_role_policy_attachment" "amazon_ec2_container_registry_policy"
 }
 
 resource "aws_eks_node_group" "worker_nodes" {
-  cluster_name          = var.cluster.name
-  node_group_name       = "${var.cluster.name}-workers"
+  cluster_name          = var.cluster_name
+  node_group_name       = "${var.cluster_name}-workers"
   node_role_arn         = aws_iam_role.worker_nodes.arn
 
   subnet_ids            = var.private_subnet_ids
@@ -57,8 +57,6 @@ resource "aws_eks_node_group" "worker_nodes" {
   labels = {
     role = "workers"
   }
-
-  version = var.cluster.version
 
   depends_on = [
     aws_iam_role_policy_attachment.amazon_eks_worker_node_policy,

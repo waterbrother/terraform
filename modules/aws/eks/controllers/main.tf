@@ -42,6 +42,10 @@ resource "aws_eks_cluster" "eks" {
   ]
 }
 
+output "cluster_name" {
+  value = aws_eks_cluster.eks.id
+}
+
 # write kubeconfig to local disk
 resource "local_file" "kubeconfig" {
   filename    = var.kubeconfig_name

@@ -16,6 +16,6 @@ module "controllers" {
 module "workers" {
   source = "../workers"
 
-  cluster = var.cluster
+  cluster_name = module.controllers.cluster_name
   private_subnet_ids  = module.network.private_subnet_ids
 }
