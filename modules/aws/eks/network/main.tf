@@ -43,6 +43,10 @@ resource "aws_subnet" "public" {
   }
 }
 
+output "public_subnet_ids" {
+  value = aws_subnet.public.*.id
+}
+
 resource "aws_subnet" "private" {
   count       			= length(var.subnets.private)
   vpc_id      			= aws_vpc.main.id
@@ -54,6 +58,10 @@ resource "aws_subnet" "private" {
     "kubernetes.io/cluster/eks"       = "shared"
     "kubernetes.io/role/internal-elb" = 1
   }
+}
+
+output "private_subnet_ids" {
+  value = aws_subnet.private.*.id
 }
 
 # EIP and Nat GW for internet access from private subnets

@@ -26,3 +26,8 @@ subnets = {
     }
   ]
 }
+
+cluster = {
+  name = "julianrutledge.com"
+  version "1.22.10"
+}
