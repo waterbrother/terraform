@@ -15,11 +15,10 @@ resource "aws_vpc" "main" {
 }
 
 resource "aws_internet_gateway" "main" {
-  count             = length(var.subnets.public)
 	vpc_id 						= aws_vpc.main.id
 
   tags = {
-    name = "${var.vpc.name}-igw-${count.index}"
+    name = "${var.vpc.name}-igw"
   }
 }
 
@@ -76,7 +75,7 @@ resource "aws_route_table" "public" {
 	vpc_id 						= aws_vpc.main.id
 	route {
 		cidr_block = "0.0.0.0/0"
-		gateway_id = aws_internet_gateway.main[count.index].id
+		gateway_id = aws_internet_gateway.main.id
 	}
 
   tags = {
