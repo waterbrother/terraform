@@ -15,10 +15,11 @@ resource "aws_vpc" "main" {
 }
 
 resource "aws_internet_gateway" "main" {
+  count             = length(var.subnets.public)
 	vpc_id 						= aws_vpc.main.id
 
   tags = {
-    name = var.vpc.name
+    name = "${var.vpc.name}-igw-${count.index}"
   }
 }
 
