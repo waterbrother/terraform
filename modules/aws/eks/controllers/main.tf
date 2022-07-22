@@ -19,8 +19,8 @@ POLICY
 
 resource "aws_iam_role_policy_attachment" "amazon_eks_cluster_policy" {
   # AWS Managed Policy
-  # https://docs.aws.amazon.com/eks/latest/userguide/security-iam-awsmanpol.html#security-iam-awsmanpol-AmazonEKSClusterPolicy
-  policy_arn  = "arn:aws:iam::aws:policy:AmazonEKSClusterPolicy"
+  # https://us-east-1.console.aws.amazon.com/iam/home?region=us-east-1&skipRegion=true#/policies/arn:aws:iam::aws:policy/AmazonEKSClusterPolicy$jsonEditor
+  policy_arn  = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
   role        = aws_iam_role.eks_cluster.name
 }
 
