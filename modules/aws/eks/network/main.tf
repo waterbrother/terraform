@@ -1,12 +1,12 @@
 resource "aws_vpc" "main" {
-  cidr_block            = var.vpc.cidr_block
+  cidr_block            = var.vpc.cidr
 
   # eks configs
   instance_tenancy      = "default"
   enable_dns_support    = true
   enable_dns_hostnames  = true
-  enable_classic_link   = false
-  enable_classic_link_dns_support   = false
+  enable_classiclink   = false
+  enable_classiclink_dns_support   = false
   assign_generated_ipv6_cidr_block  = false
 
   tags ={
@@ -17,7 +17,7 @@ resource "aws_vpc" "main" {
 resource "aws_internet_gateway" "main" {
 	vpc_id 						= aws_vpc.main.id
 
-  tags ={
+  tags = {
     name = var.vpc.name
   }
 }
@@ -37,9 +37,9 @@ resource "aws_subnet" "public" {
   map_public_ip_on_launch = true
 
   tags = {
-    name = "${var.vpc.name}-public-${count.index}
-    kubernetes.io/cluster/eks = "shared"
-    kubernetes.io/role/elb    = 1
+    name = "${var.vpc.name}-public-${count.index}"
+    "kubernetes.io/cluster/eks" = "shared"
+    "kubernetes.io/role/elb"    = 1
   }
 }
 
@@ -50,9 +50,9 @@ resource "aws_subnet" "private" {
   cidr_block        = var.subnets.private[count.index].cidr
 
   tags = {
-    name = "${var.vpc.name}-private-${count.index}
-    kubernetes.io/cluster/eks       = "shared"
-    kubernetes.io/role/internal-elb = 1
+    name = "${var.vpc.name}-private-${count.index}"
+    "kubernetes.io/cluster/eks"       = "shared"
+    "kubernetes.io/role/internal-elb" = 1
   }
 }
 

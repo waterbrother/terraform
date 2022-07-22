@@ -2,9 +2,11 @@ variable "region" {
   default     = "us-east-2"
 }
 
-variable "vpc_cidr" {}
+variable "vpc" {
+  type        = map(string)
+}
 
 variable "subnets" {
-  type        = list(map(string))
+  type        = map(list(map(string)))
 }
 

@@ -1,8 +1,8 @@
 variable "vpc" {
-  type        = map(string)
+  type = map(string)
 }
 
 variable "subnets" {
-  type        = map(list(map(string)))
+  type = map(list(map(string)))
 }
 
