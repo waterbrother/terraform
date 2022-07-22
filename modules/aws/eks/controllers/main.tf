@@ -41,3 +41,10 @@ resource "aws_eks_cluster" "eks" {
     aws_iam_role_policy_attachment.amazon_eks_cluster_policy
   ]
 }
+
+# write kubeconfig to local disk
+resource "local_file" "kubeconfig" {
+  filename    = var.kubeconfig_name
+  content     = local.kubeconfig_content
+}
+
