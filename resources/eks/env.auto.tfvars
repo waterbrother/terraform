@@ -28,6 +28,6 @@ subnets = {
 }
 
 cluster = {
-  name = "julianrutledge.com"
-  version "1.22.10"
+  name = "eks_cluster"
+  version  = "1.22.10"
 }
