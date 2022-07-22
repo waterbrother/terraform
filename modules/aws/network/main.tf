@@ -69,16 +69,42 @@ resource "aws_nat_gateway" "main" {
 	subnet_id 				= aws_subnet.public[count.index].id
 }
 
-resource "aws_route_table" "my_rt" {
+# route tables for default routes from subnets
+resource "aws_route_table" "public" {
+  count             = length(var.subnets.public)
 	vpc_id 						= aws_vpc.main.id
 	route {
 		cidr_block = "0.0.0.0/0"
-		nat_gateway_id = aws_nat_gateway.main.id
+		gateway_id = aws_internet_gateway.main[count.index].id
 	}
+
+  tags = {
+    name = "public"
+  }
 }
 
-resource "aws_route_table_association" "my_rt_assoc" {
-  count       			= length(var.subnets)
+resource "aws_route_table_association" "public" {
+  count       			= length(var.subnets.public)
 	subnet_id 				= aws_subnet.public[count.index].id
-	route_table_id 		= aws_route_table.my_rt.id
+	route_table_id 		= aws_route_table.public[count.index].id
 }
+
+resource "aws_route_table" "private" {
+  count             = length(var.subnets.private)
+	vpc_id 						= aws_vpc.main.id
+	route {
+		cidr_block = "0.0.0.0/0"
+		nat_gateway_id = aws_nat_gateway.main[count.index].id
+	}
+
+  tags = {
+    name = "private"
+  }
+}
+
+resource "aws_route_table_association" "private" {
+  count       			= length(var.subnets.private)
+	subnet_id 				= aws_subnet.private[count.index].id
+	route_table_id 		= aws_route_table.private[count.index].id
+}
+
