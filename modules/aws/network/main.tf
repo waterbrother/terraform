@@ -1,5 +1,19 @@
 resource "aws_vpc" "my_vpc" {
-  cidr_block  = var.vpc_cidr
+  cidr_block            = var.vpc.cidr_block
+  instance_tenancy      = "default"
+  enable_dns_support    = true
+  enable_dns_hostnames  = true
+  enable_classic_link   = false
+  enable_classic_link_dns_support = false
+  assign_generated_ipv6_cidr_block  = false
+  tags ={
+    name = var.vpc.name
+  }
+}
+
+output "vpc_id" {
+  value             = aws_vpc.my_vpc.id
+  sensitive         = false
 }
 
 resource "aws_subnet" "my_subnet" {

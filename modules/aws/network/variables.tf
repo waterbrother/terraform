@@ -1,4 +1,6 @@
-variable "vpc_cidr" {}
+variable "vpc" {
+  type        = map(string)
+}
 
 variable "subnets" {
   type        = list(map(string))
