@@ -22,12 +22,12 @@ resource "aws_iam_role_policy_attachment" "amazon_eks_worker_node_policy" {
 }
 
 resource "aws_iam_role_policy_attachment" "amazon_eks_cni_policy" {
-  policy_arn  = "arn:aws:iam::aws:policy/AmazonEKSCNIPolicy"
+  policy_arn  = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
   role        = aws_iam_role.worker_nodes.name
 }
 
 resource "aws_iam_role_policy_attachment" "amazon_ec2_container_registry_policy" {
-  policy_arn  = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryPolicyReadOnly"
+  policy_arn  = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
   role        = aws_iam_role.worker_nodes.name
 }
 
