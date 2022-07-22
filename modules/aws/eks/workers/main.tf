@@ -5,7 +5,7 @@ resource "aws_iam_role" "worker_nodes" {
   "Version": "2012-10-17",
   "Statement": [
     {
-      "Effect": "Allow"
+      "Effect": "Allow",
       "Principal": {
         "Service": "ec2.amazonaws.com"
       },
@@ -32,11 +32,11 @@ resource "aws_iam_role_policy_attachment" "amazon_ec2_container_registry_policy"
 }
 
 resource "aws_eks_node_group" "worker_nodes" {
-  cluster_name      = var.cluster.name
-  node_group_name   = "${var.cluster.name}-workers"
-  node_role_arn     = aws_iam_role.worker_nodes.arn
+  cluster_name          = var.cluster.name
+  node_group_name       = "${var.cluster.name}-workers"
+  node_role_arn         = aws_iam_role.worker_nodes.arn
 
-  subnet_ids        = var.private_subnet_ids
+  subnet_ids            = var.private_subnet_ids
 
   scaling_config {
     desired_size  = var.scale.desired_size
@@ -45,14 +45,14 @@ resource "aws_eks_node_group" "worker_nodes" {
   }
 
   # AL2_x86_64, AL2_x86_64_GPU, AL2_ARM_64
-  ami_type          = var.node.ami
+  ami_type              = var.node.ami
 
   # ON_DEMAND, SPOT
-  capacity_type     = var.node.capacity
+  capacity_type         = var.node.capacity
 
-  disk_size         = var.node.disk
-  force_version_update = false
-  instance_types    = [ var.node.size ]
+  disk_size             = var.node.disk
+  force_update_version  = false
+  instance_types        = [ var.node.size ]
 
   labels = {
     role = "workers"

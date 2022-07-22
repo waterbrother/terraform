@@ -3,5 +3,6 @@ module "cluster" {
 
   vpc     = var.vpc
   subnets = var.subnets
+  cluster = var.cluster
 }
 
