@@ -29,5 +29,5 @@ subnets = {
 
 cluster = {
   name = "eks_cluster"
-  version  = "1.22.10"
+  version  = "1.22.10" # currently commented out in module to use default
 }

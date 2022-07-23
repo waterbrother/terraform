@@ -29,7 +29,7 @@ resource "aws_iam_role_policy_attachment" "amazon_eks_cluster_policy" {
 resource "aws_eks_cluster" "eks" {
   name                = var.cluster.name
   role_arn            = aws_iam_role.eks_cluster.arn
-  version             = var.cluster.version
+  #version             = var.cluster.version
 
   vpc_config {
     endpoint_private_access = false
