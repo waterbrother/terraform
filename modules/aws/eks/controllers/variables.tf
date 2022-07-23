@@ -1,3 +1,5 @@
+variable "region" {}
+
 variable "cluster" {
   type = map(string)
 }

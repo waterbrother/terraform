@@ -1,3 +1,5 @@
+variable "region" {}
+
 variable "vpc" {
   type        = map(string)
 }
