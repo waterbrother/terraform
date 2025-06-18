@@ -1,12 +1,12 @@
 module "network" {
-  source  = "../network"
+  source  = "./modules/network"
   
   vpc     = var.vpc
   subnets = var.subnets
 }
   
 module "controllers" {
-  source = "../controllers"
+  source = "./modules/controllers"
 
   region  = var.region
   cluster = var.cluster
@@ -15,7 +15,7 @@ module "controllers" {
 }
 
 module "workers" {
-  source = "../workers"
+  source = "./modules/workers"
 
   cluster_name = module.controllers.cluster_name
   private_subnet_ids  = module.network.private_subnet_ids

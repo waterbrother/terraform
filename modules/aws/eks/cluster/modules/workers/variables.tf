@@ -19,7 +19,7 @@ variable "node" {
     ami       = "AL2_x86_64",
     capacity  = "ON_DEMAND",
     disk      = "20",
-    size      = "t3.small",
+    size      = "t2.micro",
   }
 }
 
